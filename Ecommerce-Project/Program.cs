@@ -1,7 +1,13 @@
+using Ecommerce_Project;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ApplicationContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationContext") ?? throw new InvalidOperationException("Connection string 'ApplicationContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 
