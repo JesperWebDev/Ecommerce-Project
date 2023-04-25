@@ -1,0 +1,35 @@
+﻿@model List<Category>
+
+<h1>Skapa ny produkt</h1>
+
+<form asp-route="Create" method="POST">
+
+    <div class="form-group">
+        <label for="category">Kategori:</label>
+        <select name="categoryName" id="category" class="form-control">
+            <option value="">-- Välj kategori --</option>
+            @foreach (var item in Model)
+            {
+                <option value="@item.Name">@Html.DisplayFor(modelItem => item.Name)</option>
+            }
+        </select>
+        <a asp-action="AddCategory" asp-controller="Product" class="btn btn-link">Lägg till kategori</a>
+    </div>
+    <div class="form-group">
+        <label for="name">Namn:</label>
+        <input type="text" name="Name" id="name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="description">Beskrivning:</label>
+        <input type="text" name="Description" id="description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="price">Pris:</label>
+        <input type="number" name="Price" id="price" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="imgUrl">Bildlänk:</label>
+        <input type="text" name="ImgUrl" id="imgUrl" class="form-control" />
+    </div>
+    <input type="submit" value="Lägg till" class="btn btn-primary" />
+</form>
