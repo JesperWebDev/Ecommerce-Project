@@ -1,0 +1,45 @@
+@model Ecommerce_Project.Models.Order
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<div>
+    <h2>@ViewBag.Title</h2>
+    @using (Html.BeginForm("SubmitOrder", "Checkout", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            <label>First Name:</label>
+            @Html.TextBoxFor(model => model.FirstName, new { required = "required" })
+        </div>
+
+        <div>
+            <label>Last Name:</label>
+            @Html.TextBoxFor(model => model.LastName, new { required = "required" })
+        </div>
+
+        <div>
+            <label>Delivery Address:</label>
+            @Html.TextAreaFor(model => model.DeliveryAdress, new { required = "required" })
+        </div>
+
+        <div>
+            <label>Card Number:</label>
+            @Html.TextBoxFor(model => model.CardNumber, new { required = "required", pattern = "[0-9]{16}", title = "Please enter a valid 16-digit card number" })
+        </div>
+
+        <div>
+            <label>Expiration Date:</label>
+            @Html.EditorFor(model => model.ExpireDate, new { htmlAttributes = new { type = "month", required = "required" } })
+        </div>
+
+        <div>
+            <label>CVC Number:</label>
+            @Html.TextBoxFor(model => model.CVC, new { required = "required", pattern = "[0-9]{3}", title = "Please enter a valid 3-digit CVC number" })
+        </div>
+
+        <button type="submit">Submit Order</button>
+    }
+</div>
