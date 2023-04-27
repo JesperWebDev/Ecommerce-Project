@@ -1,19 +1,30 @@
-﻿@model List<Category>
+﻿@using Ecommerce_Project.Models.ViewModels;
+@model CategoriesAndTags
 
 <h1>Skapa ny produkt</h1>
 
 <form asp-route="Create" method="POST">
-
     <div class="form-group">
         <label for="category">Kategori:</label>
-        <select name="categoryName" id="category" class="form-control">
-            <option value="">-- Välj kategori --</option>
-            @foreach (var item in Model)
-            {
-                <option value="@item.Name">@Html.DisplayFor(modelItem => item.Name)</option>
-            }
-        </select>
-        <a asp-action="AddCategory" asp-controller="Product" class="btn btn-link">Lägg till kategori</a>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="category-dropdown" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false">
+                Välj kategorier
+            </button>
+            <div class="dropdown-menu" aria-labelledby="category-dropdown">
+                @foreach (var category in Model.Categories)
+                {
+                    <div class="dropdown-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="@category.Name" name="categoryName" value="@category.Name">
+                            <label class="form-check-label" for="@category.Name">
+                                @category.Name
+                            </label>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <a asp-action="AddCategory" asp-controller="Products" class="btn btn-link">Lägg till nya kategorier</a>
     </div>
     <div class="form-group">
         <label for="name">Namn:</label>
@@ -31,5 +42,28 @@
         <label for="imgUrl">Bildlänk:</label>
         <input type="text" name="ImgUrl" id="imgUrl" class="form-control" />
     </div>
+    <div class="form-group">
+        <label for="tag">Taggar:</label>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="tag-dropdown" data-bs-toggle="dropdown" data-bs-haspopup="true" aria-expanded="false">
+                Välj taggar
+            </button>
+            <div class="dropdown-menu" aria-labelledby="tag-dropdown">
+                @foreach (var tag in Model.Tags)
+                {
+                    <div class="dropdown-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="@tag.Name" name="tagName" value="@tag.Name">
+                            <label class="form-check-label" for="@tag.Name">
+                                @tag.Name
+                            </label>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <a asp-action="AddTags" asp-controller="Products" class="btn btn-link">Lägg till nya taggar</a>
+    </div>
     <input type="submit" value="Lägg till" class="btn btn-primary" />
 </form>
+
