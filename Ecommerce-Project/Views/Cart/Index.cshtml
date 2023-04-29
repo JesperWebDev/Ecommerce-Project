@@ -1,0 +1,32 @@
+﻿
+
+@model Cart
+
+<h1>Kundvagnen</h1>
+
+@*Refaktoreras med list-group-komponenten kanske? Se vår todo-list.*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Produkt</th>
+            <th>Antal</th>
+            <th>Pris</th>
+            <th>Totalt</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var cartItem in Model.CartItems)
+        {
+            <tr>
+                <td>@cartItem.Product.Name</td>
+                <td>@cartItem.Quantity</td>
+                <td>@cartItem.Product.Price</td>
+                <td>@cartItem.Quantity * @cartItem.Product.Price</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
