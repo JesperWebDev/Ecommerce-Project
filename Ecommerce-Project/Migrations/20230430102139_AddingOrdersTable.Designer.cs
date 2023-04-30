@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_Project.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230425095231_AddingOrdersTable")]
+    [Migration("20230430102139_AddingOrdersTable")]
     partial class AddingOrdersTable
     {
         /// <inheritdoc />
