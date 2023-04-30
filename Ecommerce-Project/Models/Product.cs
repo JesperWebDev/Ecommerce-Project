@@ -9,7 +9,7 @@
         public string ImgUrl { get; set; }
         public List<Category> Categories { get; set; }
         public List<Tag> Tags { get; set; }
-
+        public List<CartItem> CartItems { get; set; }
     }
 }
 
