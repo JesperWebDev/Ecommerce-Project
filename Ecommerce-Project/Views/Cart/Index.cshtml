@@ -1,6 +1,4 @@
-﻿
-
-@model Cart
+﻿@model Cart
 
 <h1>Kundvagnen</h1>
 
@@ -9,24 +7,45 @@
     <thead>
         <tr>
             <th>Produkt</th>
-            <th>Antal</th>
+            @*Todo: En "sålänge"-lösning. Snabbmargin med bootstrap.*@
+            <th><span class="ms-3">Antal</span></th>
             <th>Pris</th>
             <th>Totalt</th>
+            <th></th>
         </tr>
     </thead>
-
     <tbody>
-
-        @foreach (var cartItem in Model.CartItems)
+        @foreach (CartItem cartItem in Model.CartItems)
         {
+            @*Todo: Lägg till Htmlhelpers?*@
             <tr>
                 <td>@cartItem.Product.Name</td>
-                <td>@cartItem.Quantity</td>
+                <td>
+                    @*Todo: Vi bör diva upp denhär delen för att göra det tydligt att det är 3 flex-items (form, @cartItem och form).*@
+                    <div class="d-flex align-items-center gap-2">
+                        <form asp-action="DecrementProductInCart" asp-controller="Cart" method="POST">
+                            <input hidden name="productId" value="@cartItem.ProductId">
+                            <button type="submit" class="btn btn-primary btn-sm" style="width: 27px;">-</button>
+                        </form>
+                        @cartItem.Quantity
+                        <form asp-action="IncrementProductInCart" asp-controller="Cart" method="POST">
+                            <input hidden name="productId" value="@cartItem.ProductId">
+                            <button type="submit" class="btn btn-primary btn-sm" style="width: 27px;">+</button>
+                        </form>
+                    </div>
+                </td>
                 <td>@cartItem.Product.Price</td>
-                <td>@cartItem.Quantity * @cartItem.Product.Price</td>
+                <td>@(cartItem.Quantity * @cartItem.Product.Price)</td>
+                <form asp-action="DeleteCartItem" asp-controller="Cart" method="POST">
+                    <input hidden name="removeId" value="@cartItem.Id">
+                    <td><input type="submit" class="btn btn-danger" value="Ta bort från kundvagn" /></td>
+                </form>
             </tr>
         }
-
     </tbody>
-
 </table>
+
+<form asp-action="EmptyCart" asp-controller="Cart" method="POST">
+    <input hidden name="emptyCart" value="@Model.Id">
+    <input type="submit" class="btn btn-primary" value="Rensa kundvagn" />
+</form>
