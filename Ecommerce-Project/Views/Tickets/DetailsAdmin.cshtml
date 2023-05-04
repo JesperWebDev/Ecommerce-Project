@@ -9,10 +9,12 @@
     {
         @if (message.IsAdmin)
         {
+            <li>Admin:</li>
             <li>@message.Text</li>
         }
         else
         {
+            <li>Kund:</li>
             <li><b>@message.Text</b></li>
         }
     }
