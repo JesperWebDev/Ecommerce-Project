@@ -68,9 +68,10 @@ namespace Ecommerce_Project.Controllers
             return RedirectToAction("Create");
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int productId)
         {
-            return View();
+            Product product = Context.Products.Include(c => c.Categories).FirstOrDefault(p => p.Id == productId);
+            return View(product);
         }
 
         public IActionResult AddCategory()

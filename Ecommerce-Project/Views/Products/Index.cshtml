@@ -20,6 +20,10 @@
                         <input type="hidden" name="productId" value="@product.Id">
                         <button type="submit" class="btn btn-primary">Lägg i varukorg</button>
                     </form>
+                    <form asp-action="Details" asp-controller="Products" method="POST">
+                        <input type="hidden" name="productId" value="@product.Id">
+                        <button type="submit" class="btn btn-primary">Details</button>
+                    </form>
                 </div>
             </div>
         </div>
