@@ -1,0 +1,36 @@
+﻿@model List<Ticket>
+
+<h1>Dina ärenden</h1>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket in Model)
+            {
+                <tr>
+                    <td>@ticket.Title</td>
+                    <td>@ticket.Description</td>
+                    <td>
+
+                        <form asp-action="Details" asp-controller="Tickets" method="POST">
+                            <input type="hidden" name="ticketId" value="@ticket.Id">
+                            <button type="submit" class="btn btn-primary">Gå till ticket</button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Du har inga ärenden.</p>
+}

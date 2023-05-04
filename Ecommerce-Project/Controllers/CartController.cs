@@ -18,7 +18,7 @@ namespace Ecommerce_Project.Controllers
         public IActionResult Index()
         {
             // Hämtar cart med id 1 och tillhörande cartitems och produkter. Produkter nås via relationen i CartItems
-            Cart cart = Context.Carts.Include(c => c.CartItems).ThenInclude(p => p.Product).FirstOrDefault(c => c.Id == 1);
+            Cart cart = Context.Carts.Include(c => c.CartItems).ThenInclude(p => p.Product).FirstOrDefault();
 
             // Skapar cart om den inte finns
             if (cart == null)

@@ -1,0 +1,23 @@
+﻿@model List<Ticket>
+
+<h1>Admin</h1>
+
+<div class="row">
+    @foreach (Ticket ticket in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@ticket.Title</h5>
+                    <p class="card-text">@ticket.Description</p>
+                    <p class="card-text"><strong>Email: </strong>@ticket.UserEmail</p>
+                    <form asp-action="DetailsAdmin" asp-controller="Tickets" method="POST">
+                        <input type="hidden" name="ticketId" value="@ticket.Id">
+                        <button type="submit" class="btn btn-primary">Gå till ticket</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

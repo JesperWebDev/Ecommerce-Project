@@ -1,0 +1,33 @@
+﻿@model Ticket
+
+<h1>@Model.Title</h1>
+<p>@Model.Description</p>
+
+<h2>Meddelanden:</h2>
+<ul>
+    @foreach (var message in Model.TicketMessages)
+    {
+        @if (message.IsAdmin)
+        {
+            <li>@message.Text</li>
+        }
+        else
+        {
+            <li><b>@message.Text</b></li>
+        }
+    }
+</ul>
+
+<h2>Svara på ticket:</h2>
+
+<form asp-action="AddTicketMessageAdmin" asp-controller="Tickets" method="POST">
+
+    <input type="hidden" name="TicketId" value="@Model.Id" />
+    <div class="form-group">
+        <textarea class="form-control" name="Text">
+
+        </textarea>
+        <button type="submit" class="btn btn-primary">Skicka</button>
+    </div>
+
+</form>
