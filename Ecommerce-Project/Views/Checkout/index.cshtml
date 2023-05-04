@@ -1,44 +1,90 @@
-@model Ecommerce_Project.Models.Order
+@model Ecommerce_Project.Models.ViewModels.OrderCartItem
 
 @{
     ViewBag.Title = "Checkout";
 }
 
-<div>
+<div class="container mt-4">
     <h2>@ViewBag.Title</h2>
-    @using (Html.BeginForm("SubmitOrder", "Checkout", FormMethod.Post))
+
+    <h3 class="mt-4">Order:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                if (item.Product != null)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Product.Price kr</td>
+                        <td>@item.Quantity</td>
+                        <td>@(item.Product.Price * item.Quantity) kr</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <h4>Total: @(Model.CartItems.Sum(item => item.Product.Price * item.Quantity)) kr</h4>
+
+    <h3 class="mt-4">Payment Info</h3>
+    @using (Html.BeginForm("SubmitOrder", "Checkout", FormMethod.Post, new { @class = "mt-4" }))
     {
         @Html.AntiForgeryToken()
 
-        <div>
-            <label>First Name:</label>
-            @Html.TextBoxFor(model => model.FirstName, new { required = "required" })
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">First Name:</label>
+                @Html.TextBoxFor(model => model.Order.FirstName, new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Last Name:</label>
+                @Html.TextBoxFor(model => model.Order.LastName, new { @class = "form-control", required = "required" })
+            </div>
         </div>
 
-        <div>
-            <label>Last Name:</label>
-            @Html.TextBoxFor(model => model.LastName, new { required = "required" })
+        <div class="mb-3">
+            <label class="form-label">Delivery Address:</label>
+            @Html.TextBoxFor(model => model.Order.DeliveryAdress, new { @class = "form-control", required = "required" })
         </div>
 
-        <div>
-            <label>Delivery Address:</label>
-            @Html.TextAreaFor(model => model.DeliveryAdress, new { required = "required" })
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Card Number:</label>
+                @Html.TextBoxFor(model => model.Order.CardNumber, new { @class = "form-control", required = "required", pattern = "[0-9]{16}", title = "Please enter a valid 16-digit card number" })
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Expiration Date:</label>
+                @Html.EditorFor(model => model.Order.ExpireDate, new { htmlAttributes = new { type = "month", @class = "form-control", required = "required" } })
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">CVC Number:</label>
+                @Html.TextBoxFor(model => model.Order.CVC, new { @class = "form-control", required = "required", pattern = "[0-9]{3}", title = "Please enter a valid 3-digit CVC number" })
+            </div>
         </div>
 
-        <div>
-            <label>Card Number:</label>
-            @Html.TextBoxFor(model => model.CardNumber, new { required = "required", pattern = "[0-9]{16}", title = "Please enter a valid 16-digit card number" })
-        </div>
+        @*Preliminär lösning. Var tvungen att skicka med Cartitems till SubmitOrder(). Kanske dela upp metoderna istället?*@
+        @for (int i = 0; i < Model.CartItems.Count; i++)
+        {
+            @Html.HiddenFor(model => model.CartItems[i].Id)
+            @Html.HiddenFor(model => model.CartItems[i].Quantity)
+            @Html.HiddenFor(model => model.CartItems[i].ProductId)
+            @Html.HiddenFor(model => model.CartItems[i].Product.Price)
+            @Html.HiddenFor(model => model.CartItems[i].CartId)
+        }
 
-        <div>
-            <label>Expiration Date:</label>
-            @Html.EditorFor(model => model.ExpireDate, new { htmlAttributes = new { type = "month", required = "required" } })
-        </div>
-
-        <div>
-            <label>CVC Number:</label>
-            @Html.TextBoxFor(model => model.CVC, new { required = "required", pattern = "[0-9]{3}", title = "Please enter a valid 3-digit CVC number" })
-        </div>
+        @Html.HiddenFor(model => model.CartId)
 
         <button type="submit">Submit Order</button>
     }
