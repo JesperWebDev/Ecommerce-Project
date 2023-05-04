@@ -3,6 +3,7 @@ using Ecommerce_Project;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_Project.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230504073525_AddingTicketsAndTicketsMessagesTables")]
+    partial class AddingTicketsAndTicketsMessagesTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,9 +239,6 @@ namespace Ecommerce_Project.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -324,7 +324,7 @@ namespace Ecommerce_Project.Migrations
             modelBuilder.Entity("Ecommerce_Project.Models.TicketMessage", b =>
                 {
                     b.HasOne("Ecommerce_Project.Models.Ticket", "Ticket")
-                        .WithMany("TicketMessages")
+                        .WithMany()
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -360,11 +360,6 @@ namespace Ecommerce_Project.Migrations
             modelBuilder.Entity("Ecommerce_Project.Models.Product", b =>
                 {
                     b.Navigation("CartItems");
-                });
-
-            modelBuilder.Entity("Ecommerce_Project.Models.Ticket", b =>
-                {
-                    b.Navigation("TicketMessages");
                 });
 #pragma warning restore 612, 618
         }
