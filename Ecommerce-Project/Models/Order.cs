@@ -10,5 +10,6 @@
         public string ExpireDate { get; set; }
         public string CVC { get; set; }
         public decimal TotalPrice { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
     }
 }

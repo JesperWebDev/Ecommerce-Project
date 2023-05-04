@@ -49,3 +49,8 @@
     <input hidden name="emptyCart" value="@Model.Id">
     <input type="submit" class="btn btn-primary" value="Rensa kundvagn" />
 </form>
+
+<form asp-action="Index" asp-controller="Checkout" method="POST">
+    <input hidden name="cartId" value="@Model.Id">
+    <input type="submit" class="btn btn-success" value="Checkout" />
+</form>
