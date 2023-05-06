@@ -1,0 +1,46 @@
+@model string
+
+<h2 class="my-3">Great! @Model,<br /> everything is ready.</h2>
+
+<p>You will receive a confirmation email soon<br /> with your purchase details.</p>
+
+<div class="row col-lg-6" style="margin-top:3rem;margin-bottom:3rem;">
+	<div class="col-sm-6 myflex">
+		<i style="flex-basis: 30px;" class="bi bi-geo-alt-fill"></i>
+		<div style="flex-grow:5;">
+			<h6><small>Pick-up location</small></h6>
+			<p><b>Skolvägen 12, 123 og</b></p>
+		</div>
+	</div>
+	<div class="col-sm-6 myflex">
+		<i style="flex-basis: 30px;" class="bi bi-clock-fill"></i>
+		<div style="flex-grow:5;">
+			<h6><small>Pick-up date and time</small></h6>
+			<p><b>23 May 2023, 11:00 AM</b></p>
+		</div>
+	</div>
+	<div class="col-sm-6 myflex">
+		<i style="flex-basis: 30px;" class="bi bi-box-seam-fill"></i>
+		<div style="flex-grow:5;">
+			<h6><small>Packaging date and time</small></h6>
+			<p><b>23 May 2023, 10:00 AM</b></p>
+		</div>
+	</div>
+	<div class="col-sm-6 myflex">
+		<i style="flex-basis: 30px;" class="bi bi-door-closed-fill"></i>
+		<div style="flex-grow:5;">
+			<h6><small>Pick-up door number</small></h6>
+			<p><b>ogs 231</b></p>
+		</div>
+	</div>
+	<div class="col-sm-6 myflex">
+		<i style="flex-basis: 30px;" class="bi bi-bag-fill"></i>
+		<div style="flex-grow:5;">
+			<h6><small>Number of bags</small></h6>
+			<p><b>1 bag (AED 120)</b></p>
+		</div>
+	</div>
+	<div class="col-sm-6 myflex">
+		<a class="btn btn-primary m-2" style="height: 40px; line-height: 25px;" asp-controller="Home" asp-action="Index">Go to homepage</a>
+	</div>
+</div>

@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/**
+    custom css for checkout success thanks view
+*/
+.myflex {
+    display: flex;
+    flex-direction: row;
+}

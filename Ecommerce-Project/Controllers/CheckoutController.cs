@@ -60,7 +60,7 @@ namespace Ecommerce_Project.Controllers
               _context.SaveChanges();
 
             // Skicka kunden till startsidan om allt går igenom
-            return RedirectToAction("Index", "Home");
+            return View("Thanks", viewModel.Order.FirstName);
 
         }
     }
