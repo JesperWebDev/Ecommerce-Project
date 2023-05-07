@@ -11,10 +11,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <th>Produkt</th>
+                <th>Pris</th>
+                <th>Antal</th>
+                <th>Totalt</th>
             </tr>
         </thead>
         <tbody>
@@ -24,52 +24,52 @@
                 {
                     <tr>
                         <td>@item.Product.Name</td>
-                        <td>@item.Product.PriceSEK kr</td>
+                        <td>@item.Product.Price kr</td>
                         <td>@item.Quantity</td>
-                        <td>@(item.Product.PriceSEK * item.Quantity) kr</td>
+                        <td>@(item.Product.Price * item.Quantity) kr</td>
                     </tr>
                 }
             }
         </tbody>
     </table>
 
-    <h4>Total: @(Model.CartItems.Sum(item => item.Product.PriceSEK * item.Quantity)) kr</h4>
+    <h4>Total: @(Model.CartItems.Sum(item => item.Product.Price * item.Quantity)) kr</h4>
 
-    <h3 class="mt-4">Payment Info</h3>
+    <h3 class="mt-4">Betalnings Information</h3>
     @using (Html.BeginForm("SubmitOrder", "Checkout", FormMethod.Post, new { @class = "mt-4" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="row mb-3">
             <div class="col-md-6">
-                <label class="form-label">First Name:</label>
+                <label class="form-label">Förnamn:</label>
                 @Html.TextBoxFor(model => model.Order.FirstName, new { @class = "form-control", required = "required" })
             </div>
 
             <div class="col-md-6">
-                <label class="form-label">Last Name:</label>
+                <label class="form-label">Efternamn:</label>
                 @Html.TextBoxFor(model => model.Order.LastName, new { @class = "form-control", required = "required" })
             </div>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Delivery Address:</label>
+            <label class="form-label">Adress:</label>
             @Html.TextBoxFor(model => model.Order.DeliveryAdress, new { @class = "form-control", required = "required" })
         </div>
 
         <div class="row mb-3">
             <div class="col-md-6">
-                <label class="form-label">Card Number:</label>
+                <label class="form-label">Kort Numer:</label>
                 @Html.TextBoxFor(model => model.Order.CardNumber, new { @class = "form-control", required = "required", pattern = "[0-9]{16}", title = "Please enter a valid 16-digit card number" })
             </div>
 
             <div class="col-md-3">
-                <label class="form-label">Expiration Date:</label>
+                <label class="form-label">Utgångs Datum:</label>
                 @Html.EditorFor(model => model.Order.ExpireDate, new { htmlAttributes = new { type = "month", @class = "form-control", required = "required" } })
             </div>
 
             <div class="col-md-3">
-                <label class="form-label">CVC Number:</label>
+                <label class="form-label">CVC Numer:</label>
                 @Html.TextBoxFor(model => model.Order.CVC, new { @class = "form-control", required = "required", pattern = "[0-9]{3}", title = "Please enter a valid 3-digit CVC number" })
             </div>
         </div>
@@ -80,13 +80,12 @@
             @Html.HiddenFor(model => model.CartItems[i].Id)
             @Html.HiddenFor(model => model.CartItems[i].Quantity)
             @Html.HiddenFor(model => model.CartItems[i].ProductId)
-            @Html.HiddenFor(model => model.CartItems[i].Product.PriceSEK)
-            @Html.HiddenFor(model => model.CartItems[i].Product.PriceEUR)
+            @Html.HiddenFor(model => model.CartItems[i].Product.Price)
             @Html.HiddenFor(model => model.CartItems[i].CartId)
         }
 
         @Html.HiddenFor(model => model.CartId)
 
-        <button type="submit">Submit Order</button>
+        <button type="submit">Skicka Beställning</button>
     }
 </div>
