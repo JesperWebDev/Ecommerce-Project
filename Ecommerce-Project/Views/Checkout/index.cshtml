@@ -24,16 +24,16 @@
                 {
                     <tr>
                         <td>@item.Product.Name</td>
-                        <td>@item.Product.Price kr</td>
+                        <td>@item.Product.PriceSEK kr</td>
                         <td>@item.Quantity</td>
-                        <td>@(item.Product.Price * item.Quantity) kr</td>
+                        <td>@(item.Product.PriceSEK * item.Quantity) kr</td>
                     </tr>
                 }
             }
         </tbody>
     </table>
 
-    <h4>Total: @(Model.CartItems.Sum(item => item.Product.Price * item.Quantity)) kr</h4>
+    <h4>Total: @(Model.CartItems.Sum(item => item.Product.PriceSEK * item.Quantity)) kr</h4>
 
     <h3 class="mt-4">Payment Info</h3>
     @using (Html.BeginForm("SubmitOrder", "Checkout", FormMethod.Post, new { @class = "mt-4" }))
@@ -80,7 +80,8 @@
             @Html.HiddenFor(model => model.CartItems[i].Id)
             @Html.HiddenFor(model => model.CartItems[i].Quantity)
             @Html.HiddenFor(model => model.CartItems[i].ProductId)
-            @Html.HiddenFor(model => model.CartItems[i].Product.Price)
+            @Html.HiddenFor(model => model.CartItems[i].Product.PriceSEK)
+            @Html.HiddenFor(model => model.CartItems[i].Product.PriceEUR)
             @Html.HiddenFor(model => model.CartItems[i].CartId)
         }
 

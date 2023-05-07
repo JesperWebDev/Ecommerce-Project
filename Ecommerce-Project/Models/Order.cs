@@ -9,7 +9,8 @@
         public string CardNumber { get; set; }
         public string ExpireDate { get; set; }
         public string CVC { get; set; }
-        public decimal TotalPrice { get; set; }
+        public decimal TotalPriceSEK { get; set; }
+        public decimal TotalPriceEUR { get; set; }
         public List<OrderItem> OrderItems { get; set; }
     }
 }

@@ -29,8 +29,8 @@ namespace Ecommerce_Project.Controllers
         public IActionResult SubmitOrder(OrderCartItem viewModel, int cartId)
         {
             // Räkna ut totalpriset på ordern
-            viewModel.Order.TotalPrice = viewModel.CartItems.Sum(ci => ci.Product.Price * ci.Quantity);
-
+            viewModel.Order.TotalPriceSEK = viewModel.CartItems.Sum(ci => ci.Product.PriceSEK * ci.Quantity);
+            viewModel.Order.TotalPriceEUR = viewModel.Order.TotalPriceSEK * 0.1m;
             // Spara beställningen till databasen
             _context.Orders.Add(viewModel.Order);
             _context.SaveChanges();
