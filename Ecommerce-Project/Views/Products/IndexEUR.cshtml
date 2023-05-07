@@ -19,10 +19,10 @@
                 <div class="card-body">
                     <h5 class="card-title">@product.Name</h5>
                     <p class="card-text">@product.Description</p>
-                    <p><strong>Pris: </strong>@product.PriceSEK kr</p>
+                    <p><strong>Pris: </strong>@product.PriceEUR EUR</p>
                     <form asp-action="AddToCart" asp-controller="Cart" method="POST">
                         <input type="hidden" name="productId" value="@product.Id">
-                        <input type="hidden" name="returnUrl" value="@Url.Action("Index", "Products")">
+                        <input type="hidden" name="returnUrl" value="@Url.Action("IndexEUR", "Products")">
                         <button type="submit" class="btn btn-primary">Lägg i varukorg</button>
                     </form>
                     <form asp-action="Details" asp-controller="Products" method="POST">

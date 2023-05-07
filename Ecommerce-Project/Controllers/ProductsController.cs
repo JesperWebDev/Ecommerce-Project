@@ -20,6 +20,12 @@ namespace Ecommerce_Project.Controllers
             return View(Products);
         }
 
+        public IActionResult IndexEUR()
+        {
+            List<Product> Products = Context.Products.Include(p => p.Categories).ToList();
+            return View(Products);
+        }
+
         public IActionResult Create()
         {
             
@@ -33,11 +39,14 @@ namespace Ecommerce_Project.Controllers
         public IActionResult Create(List<string> categoryName, string Name, string Description, decimal Price, string ImgUrl, List<string> tagName)
         {
             // Skapa en ny produktinstans
-
             Product NewProduct = new Product();
             NewProduct.Name = Name;
             NewProduct.Description = Description;
-            NewProduct.Price = Price;
+            NewProduct.PriceSEK = Price;
+
+            // Växla till euro med fast växelkurs
+            NewProduct.PriceEUR = Price * 0.1m;
+
             NewProduct.ImgUrl = ImgUrl;
             NewProduct.Categories = new List<Category>();
             NewProduct.Tags = new List<Tag>();

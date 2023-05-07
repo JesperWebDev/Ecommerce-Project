@@ -34,8 +34,8 @@
                         </form>
                     </div>
                 </td>
-                <td>@cartItem.Product.Price</td>
-                <td>@(cartItem.Quantity * @cartItem.Product.Price)</td>
+                <td>@cartItem.Product.PriceSEK</td>
+                <td>@(cartItem.Quantity * @cartItem.Product.PriceSEK)</td>
                 <form asp-action="DeleteCartItem" asp-controller="Cart" method="POST">
                     <input hidden name="removeId" value="@cartItem.Id">
                     <td><input type="submit" class="btn btn-danger" value="Ta bort från kundvagn" /></td>

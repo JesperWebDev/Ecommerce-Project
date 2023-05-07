@@ -30,8 +30,10 @@ namespace Ecommerce_Project.Controllers
             return View(cart);
         }
 
+
+
         [HttpPost]
-        public IActionResult AddToCart(int productId, int quantity = 1)
+        public IActionResult AddToCart(int productId, int quantity = 1, string returnUrl = "adressurl")
         {
             // Hämtar Cart från databasen med id 1 (detta behöver vi ändra till userid/session eller liknande)
             Cart cart = Context.Carts.Include(c => c.CartItems).FirstOrDefault(c => c.Id == 1);
@@ -46,7 +48,6 @@ namespace Ecommerce_Project.Controllers
                 cartItem.Quantity += quantity;
                 Context.Update(cartItem);
                 Context.SaveChanges();
-                Console.WriteLine("TESTING!!!" + cartItem.Quantity);
             }
             else
             {
@@ -58,9 +59,10 @@ namespace Ecommerce_Project.Controllers
                 cart.CartItems.Add(cartItem);
                 Context.SaveChanges();
             }
-            // Returnerar inte cart här eftersom vi vill visa produktvyn
-            return RedirectToAction("Index", "Products");
+
+            return Redirect(returnUrl);
         }
+
 
         [HttpPost]
         public IActionResult DeleteCartItem(int removeId)
