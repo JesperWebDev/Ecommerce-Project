@@ -1,0 +1,43 @@
+﻿@model List<Order>
+
+<h1>Orderlista</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order Id</th>
+            <th>Namn</th>
+            <th>Leveransadress</th>
+            <th>Produkter</th>
+            <th>Totalt pris (SEK)</th>
+            <th>Totalt pris (EUR)</th>
+            <th>Detaljer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Order order in Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.FirstName @order.LastName</td>
+                <td>@order.DeliveryAdress</td>
+                <td>
+                    <ul>
+                        @foreach (OrderItem orderItem in order.OrderItems)
+                        {
+                            <li>@orderItem.Quantity x @orderItem.Product.Name</li>
+                        }
+                    </ul>
+                </td>
+                <td>@order.TotalPriceSEK</td>
+                <td>@order.TotalPriceEUR</td>
+                <td>
+                    <form asp-action="Details" asp-controller="Orders" method="GET">
+                        <input hidden name="orderId" value="@order.Id">
+                        <button type="submit" class="btn btn-primary">Visa detaljer</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
