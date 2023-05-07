@@ -1,0 +1,53 @@
+﻿@model Order
+
+<h1>Orderdetaljer</h1>
+
+<h2>Orderinformation</h2>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Order Id</th>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <th>Namn</th>
+            <td>@Model.FirstName @Model.LastName</td>
+        </tr>
+        <tr>
+            <th>Leveransadress</th>
+            <td>@Model.DeliveryAdress</td>
+        </tr>
+        <tr>
+            <th>Totalt pris (SEK)</th>
+            <td>@Model.TotalPriceSEK</td>
+        </tr>
+        <tr>
+            <th>Totalt pris (EUR)</th>
+            <td>@Model.TotalPriceEUR</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Produkter</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Produkt</th>
+            <th>Kvantitet</th>
+            <th>Pris (SEK)</th>
+            <th>Pris (EUR)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (OrderItem orderItem in Model.OrderItems)
+        {
+            <tr>
+                <td>@orderItem.Product.Name</td>
+                <td>@orderItem.Quantity</td>
+                <td>@orderItem.Product.PriceSEK</td>
+                <td>@orderItem.Product.PriceEUR</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
