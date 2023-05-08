@@ -50,6 +50,11 @@
                 <label class="form-label">Efternamn:</label>
                 @Html.TextBoxFor(model => model.Order.LastName, new { @class = "form-control", required = "required" })
             </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Email:</label>
+                @Html.TextBoxFor(model => model.Order.Email, new { @class = "form-control", required = "required" })
+            </div>
         </div>
 
         <div class="mb-3">
