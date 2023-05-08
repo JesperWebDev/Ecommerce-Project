@@ -19,5 +19,13 @@ namespace Ecommerce_Project
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<TicketMessage> TicketMessages { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Seed data för Cart-objektet
+            modelBuilder.Entity<Cart>().HasData(new Cart { Id = 1 });
+        }
     }
+
+
 }

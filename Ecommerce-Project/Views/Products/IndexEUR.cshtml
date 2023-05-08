@@ -3,11 +3,9 @@
 <h1>Produkter</h1>
 <div class="row">
     <div class="col-md-4 mb-4">
-        <a asp-action="Create" class="btn btn-success">Lägg till produkt</a>
-    </div>
-    <div class="col-md-4 mb-4">
-        <a asp-action="Index" class="btn btn-primary">Visa priser i SEK</a>
-        <a asp-action="IndexEUR" class="btn btn-primary">Visa priser i EUR</a>
+        <a asp-action="Create" class="btn btn-primary">Lägg till produkt</a>
+
+        <a asp-action="Index" class="btn btn-light">Visa priser i SEK</a>
     </div>
 </div>
 <div class="row">
@@ -23,11 +21,11 @@
                     <form asp-action="AddToCart" asp-controller="Cart" method="POST">
                         <input type="hidden" name="productId" value="@product.Id">
                         <input type="hidden" name="returnUrl" value="@Url.Action("IndexEUR", "Products")">
-                        <button type="submit" class="btn btn-primary">Lägg i varukorg</button>
+                        <button type="submit" class="btn btn-success mb-1">Lägg i varukorg</button>
                     </form>
                     <form asp-action="Details" asp-controller="Products" method="POST">
                         <input type="hidden" name="productId" value="@product.Id">
-                        <button type="submit" class="btn btn-primary">Details</button>
+                        <button type="submit" class="btn btn-primary">Detaljer</button>
                     </form>
                 </div>
             </div>
