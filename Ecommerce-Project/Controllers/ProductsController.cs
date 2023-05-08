@@ -16,14 +16,16 @@ namespace Ecommerce_Project.Controllers
 
         public IActionResult Index()
         {
-            List<Product> Products = Context.Products.Include(p => p.Categories).ToList();
-            return View(Products);
+            List<Category> categoriesProductsTags = Context.Categories.Include(c => c.Products).ThenInclude(p => p.Tags).ToList();
+
+            return View(categoriesProductsTags);
         }
 
         public IActionResult IndexEUR()
         {
-            List<Product> Products = Context.Products.Include(p => p.Categories).ToList();
-            return View(Products);
+            List<Category> categoriesWithProducts = Context.Categories.Include(c => c.Products).ThenInclude(p => p.Tags).ToList();
+
+            return View(categoriesWithProducts);
         }
 
         public IActionResult Create()
