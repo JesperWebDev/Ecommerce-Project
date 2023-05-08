@@ -14,9 +14,9 @@ namespace Ecommerce_Project.Controllers
             _context = context;
         }
 
-        public IActionResult Index(int CartId)
+        public IActionResult Index(int cartId)
         {
-            Cart cart = _context.Carts.Include(c => c.CartItems).ThenInclude(ci => ci.Product).FirstOrDefault(c => c.Id == CartId);
+            Cart cart = _context.Carts.Include(c => c.CartItems).ThenInclude(ci => ci.Product).FirstOrDefault(c => c.Id == cartId);
 
             OrderCartItem orderCartView = new OrderCartItem();
             orderCartView.Order = new Order();
@@ -60,7 +60,7 @@ namespace Ecommerce_Project.Controllers
               _context.SaveChanges();
 
             // Skicka kunden till startsidan om allt går igenom
-            return RedirectToAction("Index", "Home");
+            return View("Thanks", viewModel);
 
         }
     }

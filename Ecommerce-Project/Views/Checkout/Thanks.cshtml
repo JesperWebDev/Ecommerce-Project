@@ -1,0 +1,54 @@
+﻿@model Ecommerce_Project.Models.ViewModels.OrderCartItem
+
+<h2 class="my-3">Tack för din Order @Model.Order.FirstName @Model.Order.LastName,<br /> Allt är klart!</h2>
+
+<h3 class="mt-4">Order:</h3>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Produkt</th>
+			<th>Pris</th>
+			<th>Antal</th>
+			<th>Totalt</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.CartItems)
+		{
+			if (item.Product != null)
+			{
+				<tr>
+					<td>@item.Product.Name</td>
+					<td>@item.Product.PriceSEK kr</td>
+					<td>@item.Quantity</td>
+					<td>@(item.Product.PriceSEK * item.Quantity) kr</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>
+
+<h4>Totalt: @(Model.CartItems.Sum(item => item.Product.PriceSEK * item.Quantity)) kr</h4>
+
+<p>Du kommer få ett bekräftelsemail till @Model.Order.Email inom kort<br /> med dina orderdetaljer.</p>
+
+<div class="row col-lg-6" style="margin-top:3rem;margin-bottom:3rem;">
+	<div class="col-sm-6 myflex">
+		<i style="flex-basis: 30px;" class="bi bi-geo-alt-fill"></i>
+		<div style="flex-grow:5;">
+			<h6><small>Leveransadress</small></h6>
+			<p><b>@Model.Order.DeliveryAdress</b></p>
+		</div>
+	</div>
+	<div class="col-sm-6 myflex">
+		<i style="flex-basis: 30px;" class="bi bi-clock-fill"></i>
+		<div style="flex-grow:5;">
+			<h6><small>Kund</small></h6>
+			<p><b>@Model.Order.FirstName @Model.Order.LastName, @Model.Order.Email</b></p>
+		</div>
+	</div>
+	
+	<div class="col-sm-6 myflex">
+		<a class="btn btn-primary m-2" style="height: 40px; line-height: 25px;" asp-controller="Home" asp-action="Index">Gå till startsidan</a>
+	</div>
+</div>

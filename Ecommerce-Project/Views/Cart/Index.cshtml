@@ -50,7 +50,7 @@
         <input type="submit" class="btn btn-danger" value="Rensa kundvagn" />
     </form>
 
-    <form asp-action="Index" asp-controller="Checkout" method="POST" style="display:inline;>
+    <form asp-action="Index" asp-controller="Checkout" method="POST" style="display:inline;">
         <input hidden name="cartId" value="@Model.Id">
         <input type="submit" class="btn btn-success" value="Checka ut" />
     </form>
