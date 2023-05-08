@@ -38,19 +38,20 @@
                 <td>@(cartItem.Quantity * @cartItem.Product.PriceSEK)</td>
                 <form asp-action="DeleteCartItem" asp-controller="Cart" method="POST">
                     <input hidden name="removeId" value="@cartItem.Id">
-                    <td><input type="submit" class="btn btn-danger" value="Ta bort från kundvagn" /></td>
+                    <td><input type="submit" class="btn btn-primary" value="Ta bort från kundvagn" /></td>
                 </form>
             </tr>
         }
     </tbody>
 </table>
+<div class="d-flex justify-content-between">
+    <form asp-action="EmptyCart" asp-controller="Cart" method="POST" style="display:inline;">
+        <input hidden name="emptyCart" value="@Model.Id">
+        <input type="submit" class="btn btn-danger" value="Rensa kundvagn" />
+    </form>
 
-<form asp-action="EmptyCart" asp-controller="Cart" method="POST">
-    <input hidden name="emptyCart" value="@Model.Id">
-    <input type="submit" class="btn btn-primary" value="Rensa kundvagn" />
-</form>
-
-<form asp-action="Index" asp-controller="Checkout" method="POST">
-    <input hidden name="cartId" value="@Model.Id">
-    <input type="submit" class="btn btn-success" value="Checkout" />
-</form>
+    <form asp-action="Index" asp-controller="Checkout" method="POST" style="display:inline;>
+        <input hidden name="cartId" value="@Model.Id">
+        <input type="submit" class="btn btn-success" value="Checka ut" />
+    </form>
+</div>
