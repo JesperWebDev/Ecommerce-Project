@@ -10,14 +10,14 @@
         <h3>Beskrivning</h3>
         <p>@Model.Description</p>
         <h4>Pris</h4>
-        <p>SEK: @Model.PriceSEK kr</p>
+        <p>SEK: @Model.PriceEUR €</p>
         <form asp-action="AddToCart" asp-controller="Cart" method="POST">
             <input type="hidden" name="productId" value="@Model.Id">
-            <input type="hidden" name="returnUrl" value="@Url.Action("Details", "Products", new { productId = Model.Id })">
+            <input type="hidden" name="returnUrl" value="@Url.Action("DetailsEUR", "Products", new { productId = Model.Id })">
             <button type="submit" class="btn btn-primary">Lägg i varukorg</button>
         </form>
         <div class="mt-3">
-            <a asp-action="DetailsEUR" asp-controller="Products" asp-route-productId="@Model.Id" class="btn btn-primary">Visa priser i EUR</a>
+            <a asp-action="Details" asp-controller="Products" asp-route-productId="@Model.Id" class="btn btn-primary">Visa priser i SEK</a>
         </div>
     </div>
 </div>

@@ -28,7 +28,7 @@ namespace Ecommerce_Project.Controllers
         {
             Context.Add(ticket);
             Context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Create");
         }
 
         public IActionResult Details(int ticketId)

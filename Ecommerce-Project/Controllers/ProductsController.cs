@@ -80,6 +80,14 @@ namespace Ecommerce_Project.Controllers
         public IActionResult Details(int productId)
         {
             Product product = Context.Products.Include(c => c.Categories).FirstOrDefault(p => p.Id == productId);
+
+            return View(product);
+        }
+
+        public IActionResult DetailsEUR(int productId)
+        {
+            Product product = Context.Products.FirstOrDefault(p => p.Id == productId);
+
             return View(product);
         }
 
