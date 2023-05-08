@@ -1,35 +1,45 @@
 ﻿@model Ticket
 
-<h1>@Model.Title</h1>
-<p>@Model.Description</p>
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Titel: @Model.Title</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Kund: @Model.UserEmail</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Beskrivning: @Model.Description</h6>
+    </div>
+</div>
 
-<h2>Meddelanden:</h2>
-<ul>
+<h3 class="mt-4">Meddelanden:</h3>
+
+<div class="list-group">
     @foreach (var message in Model.TicketMessages)
     {
-        @if (message.IsAdmin)
-        {
-            <li>Admin:</li>
-            <li>@message.Text</li>
-        }
-        else
-        {
-            <li>Kund:</li>
-            <li><b>@message.Text</b></li>
-        }
+        <div class="list-group-item list-group-item-action">
+            @if (message.IsAdmin)
+            {
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 text-danger">Admin</h5>
+                </div>
+                <p class="mb-1">@message.Text</p>
+            }
+            else
+            {
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 text-success">Kund</h5>
+                </div>
+                <p class="mb-1 font-weight-bold">@message.Text</p>
+            }
+        </div>
     }
-</ul>
+</div>
 
-<h2>Svara på ticket:</h2>
+<h3 class="mt-4">Svara på ärende:</h3>
 
 <form asp-action="AddTicketMessageUser" asp-controller="Tickets" method="POST">
 
     <input type="hidden" name="TicketId" value="@Model.Id" />
     <div class="form-group">
-        <textarea class="form-control" name="Text">
-
-        </textarea>
-        <button type="submit" class="btn btn-primary">Skicka</button>
+        <textarea class="form-control" name="Text"></textarea>
+        <button type="submit" class="btn btn-primary mt-2">Skicka</button>
     </div>
 
 </form>

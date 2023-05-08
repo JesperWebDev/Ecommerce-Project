@@ -1,5 +1,4 @@
-﻿@using Ecommerce_Project.Models
-@model Product
+﻿@model Product
 
 <h1>@Model.Name</h1>
 <div class="row">
@@ -23,7 +22,7 @@
         <h3>Beskrivning</h3>
         <p>@Model.Description</p>
         <h4>Pris</h4>
-        <p>SEK: @Model.PriceEUR €</p>
+        <p>@Model.PriceEUR €</p>
         <form asp-action="AddToCart" asp-controller="Cart" method="POST">
             <input type="hidden" name="productId" value="@Model.Id">
             <input type="hidden" name="returnUrl" value="@Url.Action("DetailsEUR", "Products", new { productId = Model.Id })">
