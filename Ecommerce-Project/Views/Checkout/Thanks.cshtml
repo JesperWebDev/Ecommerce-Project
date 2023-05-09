@@ -28,7 +28,8 @@
 	</tbody>
 </table>
 
-<h4>Totalt: @(Model.CartItems.Sum(item => item.Product.PriceSEK * item.Quantity)) kr</h4>
+<h5>Fraktkostnad: @Model.Order.ShippingRate kr</h5>
+<h4>Totalt: @(Model.CartItems.Sum(item => item.Product.PriceSEK * item.Quantity) + @Model.Order.ShippingRate) kr</h4>
 
 <p>Du kommer få ett bekräftelsemail till @Model.Order.Email inom kort<br /> med dina orderdetaljer.</p>
 

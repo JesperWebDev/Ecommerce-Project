@@ -28,11 +28,12 @@ namespace Ecommerce_Project.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SubmitOrder(OrderCartItem viewModel, int cartId)
         {
-            // Räkna ut totalpriset på ordern
-            viewModel.Order.TotalPriceSEK = viewModel.CartItems.Sum(ci => ci.Product.PriceSEK * ci.Quantity);
-            viewModel.Order.TotalPriceEUR = viewModel.Order.TotalPriceSEK * 0.1m;
-            // Spara beställningen till databasen
-            _context.Orders.Add(viewModel.Order);
+			// Räkna ut totalpriset på ordern + frakt
+			decimal totalPriceSEK = viewModel.CartItems.Sum(ci => ci.Product.PriceSEK * ci.Quantity) + viewModel.Order.ShippingRate;
+			viewModel.Order.TotalPriceSEK = totalPriceSEK;
+			viewModel.Order.TotalPriceEUR = totalPriceSEK * 0.1m;
+			// Spara beställningen till databasen
+			_context.Orders.Add(viewModel.Order);
             _context.SaveChanges();
 
             // Skapa OrderItems för varje CartItem
