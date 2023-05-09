@@ -12,6 +12,7 @@
         public string CVC { get; set; }
         public decimal TotalPriceSEK { get; set; }
         public decimal TotalPriceEUR { get; set; }
+        public decimal ShippingRate { get; set; } = 100m;
         public List<OrderItem> OrderItems { get; set; }
     }
 }

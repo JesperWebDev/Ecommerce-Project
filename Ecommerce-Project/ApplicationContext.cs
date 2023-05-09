@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 namespace Ecommerce_Project
 {
     public class ApplicationContext : DbContext
-        //Test
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
@@ -22,7 +21,7 @@ namespace Ecommerce_Project
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Seed data för Cart-objektet
+            // Seed data
             modelBuilder.Entity<Cart>().HasData(new Cart { Id = 1 });
 
             modelBuilder.Entity<Category>().HasData(

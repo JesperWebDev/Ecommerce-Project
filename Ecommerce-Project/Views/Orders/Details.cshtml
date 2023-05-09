@@ -18,6 +18,18 @@
             <td>@Model.DeliveryAdress</td>
         </tr>
         <tr>
+            <th>Email</th>
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <th>Fraktkostnad (SEK)</th>
+            <td>@Model.ShippingRate</td>
+        </tr>
+        <tr>
+            <th>Fraktkostnad (EUR)</th>
+            <td>@(Model.ShippingRate * 0.1m)</td>
+        </tr>
+        <tr>
             <th>Totalt pris (SEK)</th>
             <td>@Model.TotalPriceSEK</td>
         </tr>

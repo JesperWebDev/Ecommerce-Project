@@ -33,7 +33,8 @@
         </tbody>
     </table>
 
-    <h4>Totalt: @(Model.CartItems.Sum(item => item.Product.PriceSEK * item.Quantity)) kr</h4>
+    <h5>Fraktkostnad: @Model.Order.ShippingRate kr</h5>
+    <h4>Totalt: @(Model.CartItems.Sum(item => item.Product.PriceSEK * item.Quantity) + @Model.Order.ShippingRate) kr</h4>
 
     <h3 class="mt-4">Betalningsinformation</h3>
     @using (Html.BeginForm("SubmitOrder", "Checkout", FormMethod.Post, new { @class = "mt-4" }))
