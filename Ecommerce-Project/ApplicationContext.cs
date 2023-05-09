@@ -53,8 +53,20 @@ namespace Ecommerce_Project
                 new { ProductsId = 2, TagsId = 3 },
                 new { ProductsId = 3, TagsId = 1 },
                 new { ProductsId = 4, TagsId = 2 });
+
+            modelBuilder.Entity<Order>().HasData(
+                new Order { Id = 1, FirstName = "Anna", LastName = "Andersson", Email = "anna@exempel.com", DeliveryAdress = "Storgatan 1, 12345 Staden", CardNumber = "1234567812345678", ExpireDate = "12/25", CVC = "123", TotalPriceSEK = 1898m, TotalPriceEUR = 189.8m, ShippingRate = 100m });
+
+            modelBuilder.Entity<OrderItem>().HasData(
+                new OrderItem { Id = 1, Quantity = 1, ProductId = 1, OrderId = 1 },
+                new OrderItem { Id = 2, Quantity = 1, ProductId = 2, OrderId = 1 });
+
+            modelBuilder.Entity<Ticket>().HasData(
+                new Ticket { Id = 1, Title = "Fraktfråga", Description = "Jag undrar när min order kommer fram?", UserEmail = "anna@exempel.com" });
+
+            modelBuilder.Entity<TicketMessage>().HasData(
+                new TicketMessage { Id = 1, Text = "Hej, din order borde anlända inom 3-5 arbetsdagar.", TicketId = 1, IsAdmin = true },
+                new TicketMessage { Id = 2, Text = "Tack för informationen!", TicketId = 1, IsAdmin = false });
         }
     }
-
-
 }
