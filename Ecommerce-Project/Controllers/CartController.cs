@@ -13,14 +13,12 @@ namespace Ecommerce_Project.Controllers
             Context = _context;
         }
 
-        // Testmetoder för kundvagnen, ERSÄTT ID 1 SENARE.
-
         public IActionResult Index()
         {
             // Hämtar cart med id 1 och tillhörande cartitems och produkter. Produkter nås via relationen i CartItems
             Cart cart = Context.Carts.Include(c => c.CartItems).ThenInclude(p => p.Product).FirstOrDefault();
 
-            // Skapar cart om den inte finns
+            // Skapar cart om den inte finns, (vi har dock seedat den).
             if (cart == null)
             {
                 Cart newCart = new Cart();
@@ -30,12 +28,10 @@ namespace Ecommerce_Project.Controllers
             return View(cart);
         }
 
-
-
         [HttpPost]
         public IActionResult AddToCart(int productId, int quantity = 1, string returnUrl = "adressurl")
         {
-            // Hämtar Cart från databasen med id 1 (detta behöver vi ändra till userid/session eller liknande)
+            // Hämtar Cart från databasen med id 1
             Cart cart = Context.Carts.Include(c => c.CartItems).FirstOrDefault(c => c.Id == 1);
 
             // Hämtar CartItem från Cart baserat på productId
