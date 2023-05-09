@@ -16,11 +16,13 @@ namespace Ecommerce_Project.Controllers
 
         public IActionResult Index()
         {
+            // Hämtar en lista över Category-objekt och inkludera relaterade produkter och taggar.
             List<Category> categoriesProductsTags = Context.Categories.Include(c => c.Products).ThenInclude(p => p.Tags).ToList();
 
             return View(categoriesProductsTags);
         }
 
+        // Egen vy för att visa valuta i euro.
         public IActionResult IndexEUR()
         {
             List<Category> categoriesWithProducts = Context.Categories.Include(c => c.Products).ThenInclude(p => p.Tags).ToList();
@@ -30,7 +32,7 @@ namespace Ecommerce_Project.Controllers
 
         public IActionResult Create()
         {
-            
+            // Hämtar en lista av alla kategorier och taggar för ge möjlighet att välja flera i drop-down menyer med checkboxes.
             CategoriesAndTags ShowCategoryAndTags = new CategoriesAndTags();
             ShowCategoryAndTags.Categories = Context.Categories.ToList();
             ShowCategoryAndTags.Tags = Context.Tags.ToList();
@@ -38,6 +40,7 @@ namespace Ecommerce_Project.Controllers
         }
 
         [HttpPost]
+        // Stränglistorna är till för att kunna skicka flera kategorier och taggar
         public IActionResult Create(List<string> categoryName, string Name, string Description, decimal Price, string ImgUrl, List<string> tagName)
         {
             // Skapa en ny produktinstans
@@ -98,7 +101,7 @@ namespace Ecommerce_Project.Controllers
             return View();
         }
 
-
+        // Lägg till kategorifunktion
         [HttpPost]
         public IActionResult AddCategory(string Name) 
         { 
@@ -114,6 +117,7 @@ namespace Ecommerce_Project.Controllers
             return View();
         }
 
+        // Lägg till tagsfunktion
         [HttpPost]
         public IActionResult AddTags(string name)
         {
